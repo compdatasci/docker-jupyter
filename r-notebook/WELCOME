@@ -1,6 +1,6 @@
-# Octave with Jupyter Notebook.
+# R with Jupyter Notebook.
 
-Welcome to Octave with Jupyter Notebook!
+Welcome to R with Jupyter Notebook!
 
 To use Jupyter Notebook, see the instruction at
-https://github.com/numgeom/dockerfiles/blob/master/octave-notebook/README.md
+https://github.com/datacompsci/r-dockerfiles/blob/master/r-notebook/README.md
