@@ -68,8 +68,7 @@ if __name__ == "__main__":
                          "-v", pwd + ":/home/" + user + "/shared", 
                          "-p", port + ":" + port, 
                          "quay.io/" + user +"/" + image, 
-                         "jupyter-notebook --no-browser --ip=0.0.0.0 --port " + 
-                         port + " " + notebook], 
+                         "jupyter-notebook --no-browser --ip=0.0.0.0 --port " + port], 
                         stderr=subprocess.PIPE, universal_newlines=True)
    
    try:
@@ -81,7 +80,12 @@ if __name__ == "__main__":
 
          if not opened and ind >= 0:
             # Open browser if found URL
-            webbrowser.open("http://localhost:" + stderr_line[ind+15:])
+            if not notebook:
+                webbrowser.open("http://localhost:" + stderr_line[ind+15:])
+            else:
+                webbrowser.open("http://localhost:" + port + "/notebooks/" + notebook + 
+                                stderr_line[stderr_line.find("?token="):])
+                
             opened = True
 
       p.stderr.close()
