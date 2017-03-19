@@ -12,9 +12,9 @@ import argparse
 # Process input arguments
 parser = argparse.ArgumentParser(description=__doc__)
 
-parser.add_argument('-u', "--user", nargs='?', help='''username & groupname name used in the image. The default is numgeom.''', default="datacomptuing")
+parser.add_argument('-u', "--user", nargs='?', help='''username & groupname name used in the image. The default is numgeom.''', default="datacomputing")
 
-parser.add_argument('-i', 'image', nargs='?', help='''The Docker image to use.''', default="r-notebook")
+parser.add_argument('-i', '--image', nargs='?', help='''The Docker image to use.The default is r-notebook.''', default="r-notebook")
 
 parser.add_argument('notebook', nargs='?', help='''The notebook to open.''', default="")
 
@@ -67,7 +67,7 @@ if __name__ == "__main__":
                          "-w", "/home/" + user + "/shared", 
                          "-v", pwd + ":/home/" + user + "/shared", 
                          "-p", port + ":" + port, 
-                         "quay.io/" user +"/" + image, 
+                         "quay.io/" + user +"/" + image, 
                          "jupyter-notebook --no-browser --ip=0.0.0.0 --port " + 
                          port + " " + notebook], 
                         stderr=subprocess.PIPE, universal_newlines=True)
