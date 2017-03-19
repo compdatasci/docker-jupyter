@@ -77,7 +77,7 @@ if __name__ == "__main__":
       # Monitor the stderr to extract the URL
       for stderr_line in iter(p.stderr.readline, ""):
          ind = stderr_line.find("http://0.0.0.0:")
-         print(stderr_line)
+         sys.stderr.write(stderr_line)
 
          if not opened and ind >= 0:
             # Open browser if found URL
