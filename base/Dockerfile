@@ -36,10 +36,15 @@ RUN apt-get -y install \
     pip3 install -U pip && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Install latex_envs for Jupyter Notebook
-RUN pip3 install -U jupyter_latex_envs && \
-    jupyter nbextension install --system --py latex_envs && \
-    jupyter nbextension enable --system --py latex_envs
+# Install jupyter and ipywidgets
+RUN pip3 install -U jupyter ipywidgets && \
+    jupyter nbextension install --py --system widgetsnbextension && \
+    jupyter nbextension enable --py --system widgetsnbextension
+
+# Install jupyter_latex_envs version 1.3.7.2 for Jupyter Notebook
+RUN pip3 install -U jupyter_latex_envs==1.3.7.2 && \
+    jupyter nbextension install --py --system latex_envs && \
+    jupyter nbextension enable --py --system latex_envs
 
 # Install spell checker for Jupyter Notebook
 RUN jupyter nbextension install --system https://bitbucket.org/ipre/calico/downloads/calico-spell-check-1.0.zip && \
