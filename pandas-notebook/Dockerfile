@@ -6,7 +6,7 @@
 # Authors:
 # Xiangmin Jiao <xiangmin.jiao@stonybrook.edu>
 
-FROM quay.io/compdatasci/scipy
+FROM quay.io/compdatasci/scipy-notebook
 LABEL maintainer "Xiangmin Jiao <xiangmin.jiao@stonybrook.edu>"
 
 # Install pandas
