@@ -1,7 +1,7 @@
-# Builds a Docker image for Pandas with Jupyter Notebook.
+# Builds a Docker image for Octave with Jupyter Notebook.
 #
 # It can be found at:
-#   https://quay.io/repository/compdatasci/pandas-notebook
+#   https://quay.io/repository/compdatasci/octave-notebook
 #
 # Authors:
 # Xiangmin Jiao <xiangmin.jiao@stonybrook.edu>
@@ -9,12 +9,16 @@
 FROM quay.io/compdatasci/base
 LABEL maintainer "Xiangmin Jiao <xiangmin.jiao@stonybrook.edu>"
 
-# Install pandas
+# Install octave (liboctave-dev is not installed to save space.)
 USER root
 RUN apt-get update && \
     apt-get upgrade -y -o Dpkg::Options::="--force-confold" && \
-    apt-get install -y python3-pandas && \
+    apt-get install -y octave gnuplot && \
     rm -rf /var/lib/apt/lists/*
+
+# Install latex_envs for Jupyter Notebook
+RUN pip3 install -U octave_kernel && \
+    python3 -m octave_kernel.install
 
 # Clean Up
 RUN rm -rf /tmp/* /var/tmp/*

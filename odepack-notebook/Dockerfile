@@ -1,19 +1,19 @@
-# Builds a Docker image for Pandas with Jupyter Notebook.
+# Builds a Docker image for Octave with odepkg and Jupyter Notebook.
 #
 # It can be found at:
-#   https://quay.io/repository/compdatasci/pandas-notebook
+#   https://quay.io/repository/compdatasci/odepack-notebook
 #
 # Authors:
 # Xiangmin Jiao <xiangmin.jiao@stonybrook.edu>
 
-FROM quay.io/compdatasci/base
+FROM quay.io/compdatasci/octave-notebook
 LABEL maintainer "Xiangmin Jiao <xiangmin.jiao@stonybrook.edu>"
 
-# Install pandas
+# Install octave-sybolic and octave-odepkg
 USER root
 RUN apt-get update && \
     apt-get upgrade -y -o Dpkg::Options::="--force-confold" && \
-    apt-get install -y python3-pandas && \
+    apt-get install -y octave-symbolic octave-odepkg && \
     rm -rf /var/lib/apt/lists/*
 
 # Clean Up

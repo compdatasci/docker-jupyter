@@ -1,25 +1,25 @@
-## Docker Image for Pandas with Jupyter Notebook.
+## Docker Image for Octave with ODE package and Jupyter Notebook.
 
-This Docker image is for Pandas with Jupyter Notebook. This images inherits [compdatasci/base](https://quay.io/repository/compdatasci/base). 
+This Docker image is for Octave with ODE package and Jupyter Notebook. This images inherits [compdatasci/octave-notebook](https://quay.io/repository/compdatasci/octave-notebook). 
 
-[![Docker Repository on Quay](https://quay.io/repository/compdatasci/pandas-notebook/status "Docker Repository on Quay")](https://quay.io/repository/compdatasci/pandas-notebook)
+[![Docker Repository on Quay](https://quay.io/repository/compdatasci/odepack-notebook/status "Docker Repository on Quay")](https://quay.io/repository/compdatasci/odepack-notebook)
 
 ## Running Jupyter Notebook
 
 To install Docker for your platform (Windows, MacOS, Linux, cloud platforms, etc.), follow the instructions at [docker.com](https://docs.docker.com/engine/getstarted/step_one/).
 
-Once you have Docker installed, you can start Jupyter Notebook using the following command in the directory that contains your notebook (e.g., pandas-intro.ipynb):
+Once you have Docker installed, you can start Jupyter Notebook using the following command in the directory that contains your notebook (e.g., ode-intro.ipynb):
 ```
-    docker-notebook -i pandas-notebook pandas-intro.ipynb
+    docker-notebook -i odepack-notebook ode-intro.ipynb
 ```
-The `docker-notebook` script can be downloaded at <https://github.com/datacompsci/r-dockerfiles/raw/master/docker-notebook>.
+The `docker-notebook` script can be downloaded at <https://github.com/compdatasci/dockerfiles/raw/master/docker-notebook>.
 
 ## Running Jupyter Notebook with Docker Toolbox
 
 If your version of Windows does not support Docker, you may need to [install Docker Toolbox](https://docs.docker.com/toolbox/toolbox_install_windows/) instead. After you have installed Docker Toolbox, start it and run the following command in a Docker Toolbox terminal in your work directory:
 ```
      docker run --rm -w /home/compdatasci/shared -v $(pwd):/home/compdatasci/shared -d -p \
-    $(docker-machine ip $(docker-machine active)):8088:8088 quay.io/compdatasci/pandas-notebook \
+    $(docker-machine ip $(docker-machine active)):8088:8088 quay.io/compdatasci/odepack-notebook \
     'jupyter-notebook --no-browser --ip=0.0.0.0 --port=8088'
 ```
 
@@ -37,14 +37,14 @@ When you have finished using Jupyter Notebook, use Control-C to stop this server
 
 ## Running as Linux environment
 
-You can also run the image as a Linux environment for Pandas. You can run the image using the following command:
+You can also run the image as a Linux environment for Odepack. You can run the image using the following command:
 
     docker run --rm -ti -w/home/compdatasci/shared -v $(pwd):/home/compdatasci/shared \
-    quay.io/compdatasci/pandas-notebook:latest
+    quay.io/compdatasci/odepack-notebook:latest
 
 which would share your current working directory into the container as `~/shared`. *Note that you should only save files under the shared directory because all other files will be lost when the process ends.*
 
 Users with SELinux-enabled Linux distributions (Redhat, Fedora, CentOS, and others) will need to add the `:z` flag to the volume mount, e.g.:
 
     docker run --rm -ti -w/home/compdatasci/shared -v $(pwd):/home/compdatasci/shared:z \
-    quay.io/compdatasci/pandas-notebook:latest
+    quay.io/compdatasci/odepack-notebook:latest

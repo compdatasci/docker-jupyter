@@ -1,12 +1,12 @@
 # Builds a Docker image for R with Jupyter Notebook.
 #
 # It can be found at:
-#   https://quay.io/repository/datacomputing/r-notebook
+#   https://quay.io/repository/compdatasci/r-notebook
 #
 # Authors:
 # Xiangmin Jiao <xiangmin.jiao@stonybrook.edu>
 
-FROM quay.io/datacomputing/base
+FROM quay.io/compdatasci/base
 LABEL maintainer "Xiangmin Jiao <xiangmin.jiao@stonybrook.edu>"
 
 # Install R
@@ -30,9 +30,9 @@ RUN R --no-save < install_irkernel.R
 # Clean Up
 RUN rm -rf /tmp/* /var/tmp/*
 
-USER $DCUSER
+USER $CDSUSER
 
 # Print something nice on entry.
-COPY WELCOME $DCHOME/WELCOME
+COPY WELCOME $CDSHOME/WELCOME
 
 USER root

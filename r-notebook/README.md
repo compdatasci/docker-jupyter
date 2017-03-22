@@ -1,8 +1,8 @@
 ## Docker Image for Data Computing with Jupyter Notebook.
 
-This Docker image is for R with Jupyter Notebook. This images inherits [datacomputing/base](https://quay.io/repository/datacomputing/base). 
+This Docker image is for R with Jupyter Notebook. This images inherits [compdatasci/base](https://quay.io/repository/compdatasci/base). 
 
-[![Docker Repository on Quay](https://quay.io/repository/datacomputing/r-notebook/status "Docker Repository on Quay")](https://quay.io/repository/datacomputing/r-notebook)
+[![Docker Repository on Quay](https://quay.io/repository/compdatasci/r-notebook/status "Docker Repository on Quay")](https://quay.io/repository/compdatasci/r-notebook)
 
 ## Running Jupyter Notebook with Docker
 
@@ -18,8 +18,8 @@ where the `docker-notebook` script can be downloaded at <https://github.com/data
 
 If your version of Windows does not support Docker, you may need to [install Docker Toolbox](https://docs.docker.com/toolbox/toolbox_install_windows/) instead. After you have installed Docker Toolbox, start it and run the following command in a Docker Toolbox terminal in your work directory:
 ```
-     docker run --rm -w /home/datacomputing/shared -v $(pwd):/home/datacomputing/shared -d -p \
-    $(docker-machine ip $(docker-machine active)):8088:8088 quay.io/datacomputing/r-notebook \
+     docker run --rm -w /home/compdatasci/shared -v $(pwd):/home/compdatasci/shared -d -p \
+    $(docker-machine ip $(docker-machine active)):8088:8088 quay.io/compdatasci/r-notebook \
     'jupyter-notebook --no-browser --ip=0.0.0.0 --port=8088'
 ```
 
@@ -39,12 +39,12 @@ When you have finished using Jupyter Notebook, use Control-C to stop this server
 
 You can also run the image as a Linux environment for R. You can run the image using the following command:
 
-    docker run --rm -ti -w/home/datacomputing/shared -v $(pwd):/home/datacomputing/shared \
-    quay.io/datacomputing/r-notebook:latest
+    docker run --rm -ti -w/home/compdatasci/shared -v $(pwd):/home/compdatasci/shared \
+    quay.io/compdatasci/r-notebook:latest
 
 which would share your current working directory into the container as `~/shared`. *Note that you should only save files under the shared directory because all other files will be lost when the process ends.*
 
 Users with SELinux-enabled Linux distributions (Redhat, Fedora, CentOS, and others) will need to add the `:z` flag to the volume mount, e.g.:
 
-    docker run --rm -ti -w/home/datacomputing/shared -v $(pwd):/home/datacomputing/shared:z \
-    quay.io/datacomputing/r-notebook:latest
+    docker run --rm -ti -w/home/compdatasci/shared -v $(pwd):/home/compdatasci/shared:z \
+    quay.io/compdatasci/r-notebook:latest
