@@ -2,7 +2,7 @@
 
 This Docker image is for Pandas with Jupyter Notebook. This images inherits [compdatasci/base](https://hub.docker.com/r/compdatasci/base). 
 
-[![Docker Image](https://images.microbadger.com/badges/image/compdatasci/pandas-notebook.svg)](https://hub.docker.com/r/compdatasci/pandas-notebook)
+[![Docker Repository on Quay](https://quay.io/repository/compdatasci/pandas-notebook/status "Docker Repository on Quay")](https://quay.io/repository/compdatasci/pandas-notebook)
 
 ## Running Jupyter Notebook
 

@@ -2,7 +2,7 @@
 
 This Docker image is for R with Jupyter Notebook. This images inherits [compdatasci/base](https://hub.docker.com/r/compdatasci/base). 
 
-[![Docker Image](https://images.microbadger.com/badges/image/compdatasci/r-notebook.svg)](https://hub.docker.com/r/compdatasci/r-notebook)
+[![Docker Repository on Quay](https://quay.io/repository/compdatasci/r-notebook/status "Docker Repository on Quay")](https://quay.io/repository/compdatasci/r-notebook)
 
 ## Running Jupyter Notebook with Docker
 
