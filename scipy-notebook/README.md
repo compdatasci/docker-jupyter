@@ -2,8 +2,6 @@
 
 This Docker image is for SciPy with Jupyter Notebook. This images inherits [compdatasci/base](https://hub.docker.com/repository/compdatasci/base). 
 
-[![Docker Repository on Quay](https://quay.io/repository/compdatasci/scipy-notebook/status "Docker Repository on Quay")](https://quay.io/repository/compdatasci/scipy-notebook)
-
 ## Running Jupyter Notebook
 
 To install Docker for your platform (Windows, MacOS, Linux, cloud platforms, etc.), follow the instructions at [docker.com](https://docs.docker.com/engine/getstarted/step_one/).

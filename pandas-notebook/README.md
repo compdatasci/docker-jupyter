@@ -2,8 +2,6 @@
 
 This Docker image is for Pandas with Jupyter Notebook. This images inherits [compdatasci/base](https://hub.docker.com/r/compdatasci/base). 
 
-[![Docker Repository on Quay](https://quay.io/repository/compdatasci/pandas-notebook/status "Docker Repository on Quay")](https://quay.io/repository/compdatasci/pandas-notebook)
-
 ## Running Jupyter Notebook
 
 To install Docker for your platform (Windows, MacOS, Linux, cloud platforms, etc.), follow the instructions at [docker.com](https://docs.docker.com/engine/getstarted/step_one/).
