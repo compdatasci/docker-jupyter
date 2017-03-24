@@ -71,7 +71,6 @@ ENV DOCKER_USER=compdatasci
 ENV DOCKER_GROUP=$DOCKER_USER
 ENV DOCKER_HOME=/home/$DOCKER_USER
 ENV HOME=$DOCKER_HOME
-ENV SHELL=/bin/bash
 
 # Set up user so that we do not run as root
 # See https://github.com/phusion/baseimage-docker/issues/186
@@ -90,14 +89,6 @@ USER $DOCKER_USER
 RUN touch $DOCKER_HOME/.sudo_as_admin_successful && \
     mkdir $DOCKER_HOME/shared
 
-
-# Customize font for output area
-RUN mkdir -p $DOCKER_HOME/.jupyter/custom && \
-    echo "div.output_area pre {" > $DOCKER_HOME/.jupyter/custom && \
-    echo "  font-family: DejaVu Sans Mono;" >> $DOCKER_HOME/.jupyter/custom && \
-    echo "  font-size: small;" >> $DOCKER_HOME/.jupyter/custom && \
-    echo "}" >> $DOCKER_HOME/.jupyter/custom
-
 VOLUME $DOCKER_HOME/shared
 
 # Print something nice on entry.
@@ -105,5 +96,5 @@ COPY WELCOME $DOCKER_HOME/WELCOME
 
 WORKDIR $DOCKER_HOME
 USER root
-ENTRYPOINT ["/sbin/my_init","--quiet","--","/sbin/setuser","compdatasci","/bin/bash","-c"]
+ENTRYPOINT ["/sbin/my_init","--quiet","--","/sbin/setuser","compdatasci","/bin/bash","-l","-c"]
 CMD ["/bin/bash","-l","-i"]
