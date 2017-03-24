@@ -21,8 +21,8 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Install latex_envs for Jupyter Notebook
-RUN pip install -U octave_kernel && \
-    python -m octave_kernel.install
+RUN pip3 install -U octave_kernel && \
+    python3 -m octave_kernel.install
 
 # Clean Up
 RUN rm -rf /tmp/* /var/tmp/*

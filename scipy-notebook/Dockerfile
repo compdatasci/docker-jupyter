@@ -14,16 +14,10 @@ USER root
 RUN apt-get update && \
     apt-get upgrade -y -o Dpkg::Options::="--force-confold" && \
     apt-get install -y --no-install-recommends \
-            python3-pip \
-            python-pandas python3-pandas \
-            python-sympy python3-sympy \
-            python-scipy python3-scipy && \
+            python3-pandas \
+            python3-sympy \
+            python3-scipy && \
     rm -rf /var/lib/apt/lists/*
-
-# Install jupyter and ipywidgets
-RUN pip3 install -U pip setuptools
-RUN pip3 install -U ipython ipykernel
-RUN python3 -m ipykernel install --sys-prefix
 
 # Clean Up
 RUN rm -rf /tmp/* /var/tmp/*

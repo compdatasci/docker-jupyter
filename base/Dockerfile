@@ -29,24 +29,24 @@ ENV LC_ALL=C.UTF-8 \
     LANG=C.UTF-8 \
     LANGUAGE=C.UTF-8
 
-# Install pip
+# Install pip for python3
 RUN apt-get install -y --no-install-recommends \
             build-essential \
-            python-dev \
             python-pip \
+            python3-pip \
             pandoc \
             ttf-dejavu ttf-dejavu-mono-udeb && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install jupyter and ipywidgets
-RUN pip install -U pip setuptools
+RUN pip3 install -U pip setuptools
 
-RUN pip install -U jupyter ipywidgets && \
+RUN pip3 install -U jupyter ipywidgets && \
     jupyter nbextension install --py --system widgetsnbextension && \
     jupyter nbextension enable --py --system widgetsnbextension
 
 # Install jupyter_latex_envs version 1.3.7.2 for Jupyter Notebook
-RUN pip install -U jupyter_latex_envs==1.3.7.2 && \
+RUN pip3 install -U jupyter_latex_envs==1.3.7.2 && \
     jupyter nbextension install --py --system latex_envs && \
     jupyter nbextension enable --py --system latex_envs
 
