@@ -32,11 +32,12 @@ ENV LC_ALL=C.UTF-8 \
 # Install pip
 RUN apt-get install -y --no-install-recommends \
             python-pip \
-            setuptools \
             pandoc && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install jupyter and ipywidgets
+RUN pip install -U pip setuptools
+
 RUN pip install -U jupyter ipywidgets && \
     jupyter nbextension install --py --system widgetsnbextension && \
     jupyter nbextension enable --py --system widgetsnbextension
