@@ -2,7 +2,7 @@
 
 This Docker image is for Octave with ODE package and Jupyter Notebook. This images inherits [compdatasci/octave-notebook](https://hub.docker.com/r/compdatasci/octave-notebook). 
 
-[![Docker Repository on Quay](https://quay.io/repository/compdatasci/odepack-notebook/status "Docker Repository on Quay")](https://hub.docker.com/r/compdatasci/odepack-notebook)
+[![Docker Image](https://images.microbadger.com/badges/image/compdatasci/odepack-notebook.svg)](https://microbadger.com/images/compdatasci/odepack-notebook "Docker Repository")](https://hub.docker.com/r/compdatasci/odepack-notebook)
 
 ## Running Jupyter Notebook
 

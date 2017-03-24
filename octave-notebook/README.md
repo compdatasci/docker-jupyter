@@ -2,7 +2,7 @@
 
 This Docker image is for Octave 4.0 with Jupyter Notebook. This images inherits [compdatasci/base](https://hub.docker.com/r/compdatasci/base). 
 
-[![Docker Repository on Quay](https://quay.io/repository/compdatasci/octave-notebook/status "Docker Repository on Quay")](https://hub.docker.com/r/compdatasci/octave-notebook)
+[![Docker Image](https://images.microbadger.com/badges/image/compdatasci/octave-notebook.svg)](https://microbadger.com/images/compdatasci/octave-notebook "Docker Repository")](https://hub.docker.com/r/compdatasci/octave-notebook)
 
 ## Running Jupyter Notebook with Docker
 
