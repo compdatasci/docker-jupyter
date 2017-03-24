@@ -6,7 +6,7 @@
 # Authors:
 # Xiangmin Jiao <xiangmin.jiao@stonybrook.edu>
 
-FROM compdatasci/scipy-notebook
+FROM compdatasci/base
 LABEL maintainer "Xiangmin Jiao <xiangmin.jiao@stonybrook.edu>"
 
 # Install pandas
@@ -14,7 +14,7 @@ USER root
 RUN apt-get update && \
     apt-get upgrade -y -o Dpkg::Options::="--force-confold" && \
     apt-get install -y --no-install-recommends \
-            python-pandas panda python3-pandas && \
+            python-pandas python3-pandas && \
     rm -rf /var/lib/apt/lists/*
 
 # Clean Up
