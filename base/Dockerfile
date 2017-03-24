@@ -9,10 +9,10 @@
 #   https://hub.docker.com/r/compdatasci/base
 #
 # Authors:
-# Xiangmin Jiao <xiangmin.jiao@stonybrook.edu>
+# Xiangmin Jiao <xmjiao@gmail.com>
 
 FROM phusion/baseimage:0.9.20
-LABEL maintainer "Xiangmin Jiao <xiangmin.jiao@stonybrook.edu>"
+LABEL maintainer "Xiangmin Jiao <xmjiao@gmail.com>"
 
 # Get Ubuntu updates, pip, etc.
 # Install jupyter, ipywidgets 

@@ -4,10 +4,10 @@
 #   https://hub.docker.com/r/compdatasci/octave-notebook
 #
 # Authors:
-# Xiangmin Jiao <xiangmin.jiao@stonybrook.edu>
+# Xiangmin Jiao <xmjiao@gmail.com>
 
 FROM compdatasci/base
-LABEL maintainer "Xiangmin Jiao <xiangmin.jiao@stonybrook.edu>"
+LABEL maintainer "Xiangmin Jiao <xmjiao@gmail.com>"
 
 # Install octave and octave_kernel (liboctave-dev is not installed to save space.)
 USER root
