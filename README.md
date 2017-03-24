@@ -1,4 +1,4 @@
-## Docker Images for R with Jupyter Notebook
+## Docker Images for Jupyter Notebook
 
 This repository contains the Dockerfiles for building a lightweight Docker image for Octave, R, SciPy, and Pandas  with Jupyter Notebook. It also includes some useful Jupyter Notebook extensions, including LaTeX environment and spell checker.
 
