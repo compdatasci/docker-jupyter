@@ -16,6 +16,7 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends octave \
         octave-symbolic \
         octave-odepkg \
+        ghostscript \
         gnuplot && \
     rm -rf /var/lib/apt/lists/*
 
