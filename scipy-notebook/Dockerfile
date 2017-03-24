@@ -11,13 +11,8 @@ LABEL maintainer "Xiangmin Jiao <xiangmin.jiao@stonybrook.edu>"
 
 # Install scipy, sympy, and pandas
 USER root
-RUN apt-get update && \
-    apt-get upgrade -y -o Dpkg::Options::="--force-confold" && \
-    apt-get install -y --no-install-recommends \
-            python3-pandas \
-            python3-sympy \
-            python3-scipy && \
-    rm -rf /var/lib/apt/lists/*
+
+RUN pip3 install -U sympy scipy pandas
 
 # Clean Up
 RUN rm -rf /tmp/* /var/tmp/*
