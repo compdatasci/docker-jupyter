@@ -34,7 +34,8 @@ RUN apt-get install -y --no-install-recommends \
             build-essential \
             python-dev \
             python-pip \
-            pandoc && \
+            pandoc \
+            ttf-dejavu ttf-dejavu-mono-udeb && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install jupyter and ipywidgets
@@ -88,6 +89,15 @@ RUN useradd -m -s /bin/bash -G sudo,docker_env $DOCKER_USER && \
 USER $DOCKER_USER
 RUN touch $DOCKER_HOME/.sudo_as_admin_successful && \
     mkdir $DOCKER_HOME/shared
+
+
+# Customize font for output area
+RUN mkdir -p $DOCKER_HOME/.jupyter/custom && \
+    echo "div.output_area pre {" > $DOCKER_HOME/.jupyter/custom && \
+    echo "  font-family: DejaVu Sans Mono;" >> $DOCKER_HOME/.jupyter/custom && \
+    echo "  font-size: small;" >> $DOCKER_HOME/.jupyter/custom && \
+    echo "}" >> $DOCKER_HOME/.jupyter/custom
+
 VOLUME $DOCKER_HOME/shared
 
 # Print something nice on entry.
