@@ -9,16 +9,18 @@
 #   https://hub.docker.com/r/compdatasci/base
 #
 # Authors:
-# Xiangmin Jiao <xiangmin.jiao@stonybrook.edu>
+# Xiangmin Jiao <xmjiao@gmail.com>
 
 FROM phusion/baseimage:0.9.20
-LABEL maintainer "Xiangmin Jiao <xiangmin.jiao@stonybrook.edu>"
+LABEL maintainer "Xiangmin Jiao <xmjiao@gmail.com>"
 
 # Get Ubuntu updates, pip, etc.
 # Install jupyter, ipywidgets 
 # jupyter_latex_envs version 1.3.7.2 for Jupyter Notebook
 # Install spell checker for Jupyter Notebook
 USER root
+WORKDIR /tmp
+
 RUN apt-get update && \
     apt-get upgrade -y -o Dpkg::Options::="--force-confold" && \
     apt-get install -y --no-install-recommends \

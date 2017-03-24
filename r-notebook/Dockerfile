@@ -4,10 +4,10 @@
 #   https://hub.docker.com/r/compdatasci/r-notebook
 #
 # Authors:
-# Xiangmin Jiao <xiangmin.jiao@stonybrook.edu>
+# Xiangmin Jiao <xmjiao@gmail.com>
 
 FROM compdatasci/base
-LABEL maintainer "Xiangmin Jiao <xiangmin.jiao@stonybrook.edu>"
+LABEL maintainer "Xiangmin Jiao <xmjiao@gmail.com>"
 
 # Install R
 USER root
@@ -25,3 +25,5 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD5
             libcurl4-openssl-dev && \
     R --no-save < /tmp/install_irkernel.R && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+WORKDIR $DOCKER_HOME
