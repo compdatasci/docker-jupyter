@@ -18,7 +18,7 @@ LABEL maintainer "Xiangmin Jiao <xiangmin.jiao@stonybrook.edu>"
 USER root
 RUN apt-get update && \
     apt-get upgrade -y -o Dpkg::Options::="--force-confold" && \
-    apt-get -y install \
+    apt-get install -y --no-install-recommends \
             locales \
             sudo && \
     echo "C.UTF-8 UTF-8" > /etc/locale.gen && \
@@ -29,20 +29,19 @@ ENV LC_ALL=C.UTF-8 \
     LANG=C.UTF-8 \
     LANGUAGE=C.UTF-8
 
-# Install python3 and update pip
-RUN apt-get -y install \
-            python3 \
-            python3-pip \
+# Install pip
+RUN apt-get install -y --no-install-recommends \
+            python-pip \
             pandoc && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install jupyter and ipywidgets
-RUN pip3 install -U jupyter ipywidgets && \
+RUN pip install -U jupyter ipywidgets && \
     jupyter nbextension install --py --system widgetsnbextension && \
     jupyter nbextension enable --py --system widgetsnbextension
 
 # Install jupyter_latex_envs version 1.3.7.2 for Jupyter Notebook
-RUN pip3 install -U jupyter_latex_envs==1.3.7.2 && \
+RUN pip install -U jupyter_latex_envs==1.3.7.2 && \
     jupyter nbextension install --py --system latex_envs && \
     jupyter nbextension enable --py --system latex_envs
 
@@ -53,10 +52,21 @@ RUN jupyter nbextension install --system https://bitbucket.org/ipre/calico/downl
     jupyter nbextension enable --system calico-spell-check && \
     rm -rf /tmp/* /var/tmp/*
 
-ENV CDSUSER=compdatasci
-ENV CDSHOME=/home/$CDSUSER
+ADD image /
 
-COPY set-home-permissions.sh /etc/my_init.d/set-home-permissions.sh
+########################################################
+# Customization for user and location
+########################################################
+
+# Change the default timezone to America/New_York
+RUN ln -s -f /usr/share/zoneinfo/America/New_York /etc/localtime && \
+    echo "America/New_York" > /etc/timezone
+
+ENV DOCKER_USER=compdatasci
+ENV DOCKER_GROUP=$DOCKER_USER
+ENV DOCKER_HOME=/home/$DOCKER_USER
+ENV HOME=$DOCKER_HOME
+ENV SHELL=/bin/bash
 
 # Set up user so that we do not run as root
 # See https://github.com/phusion/baseimage-docker/issues/186
@@ -64,23 +74,22 @@ COPY set-home-permissions.sh /etc/my_init.d/set-home-permissions.sh
 # Add script to set up permissions of home directory on myinit
 # Run ldconfig so that /usr/local/lib is in the default search
 # path for the dynamic linker.
-RUN useradd -m -s /bin/bash -G sudo,docker_env $CDSUSER && \
-    echo "$CDSUSER:docker" | chpasswd && \
-    echo "$CDSUSER ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
+RUN useradd -m -s /bin/bash -G sudo,docker_env $DOCKER_USER && \
+    echo "$DOCKER_USER:docker" | chpasswd && \
+    echo "$DOCKER_USER ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     touch /etc/service/syslog-forwarder/down && \
-    echo "cat $CDSHOME/WELCOME" >> /$CDSHOME/.bashrc && \
-    chmod +x /etc/my_init.d/set-home-permissions.sh && \
+    echo "cat $DOCKER_HOME/WELCOME" >> /$DOCKER_HOME/.bashrc && \
     ldconfig
 
-USER $CDSUSER
-RUN touch $CDSHOME/.sudo_as_admin_successful && \
-    mkdir $CDSHOME/shared
-VOLUME $CDSHOME/shared
+USER $DOCKER_USER
+RUN touch $DOCKER_HOME/.sudo_as_admin_successful && \
+    mkdir $DOCKER_HOME/shared
+VOLUME $DOCKER_HOME/shared
 
 # Print something nice on entry.
-COPY WELCOME $CDSHOME/WELCOME
+COPY WELCOME $DOCKER_HOME/WELCOME
 
-WORKDIR $CDSHOME
+WORKDIR $DOCKER_HOME
 USER root
-ENTRYPOINT ["/sbin/my_init","--quiet","--","/sbin/setuser","compdatasci","/bin/bash","-l","-c"]
-CMD ["/bin/bash","-i"]
+ENTRYPOINT ["/sbin/my_init","--quiet","--","/sbin/setuser","compdatasci","/bin/bash","-c"]
+CMD ["/bin/bash","-l","-i"]

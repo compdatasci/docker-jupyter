@@ -13,15 +13,15 @@ LABEL maintainer "Xiangmin Jiao <xiangmin.jiao@stonybrook.edu>"
 USER root
 RUN apt-get update && \
     apt-get upgrade -y -o Dpkg::Options::="--force-confold" && \
-    apt-get install -y octave-symbolic octave-odepkg && \
+    apt-get install -y --no-install-recommends octave-symbolic octave-odepkg && \
     rm -rf /var/lib/apt/lists/*
 
 # Clean Up
 RUN rm -rf /tmp/* /var/tmp/*
 
-USER $CDSUSER
+USER $DOCKER_USER
 
 # Print something nice on entry.
-COPY WELCOME $CDSHOME/WELCOME
+COPY WELCOME $DOCKER_HOME/WELCOME
 
 USER root

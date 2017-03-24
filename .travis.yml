@@ -1,0 +1,13 @@
+sudo: required
+
+services:
+  - docker
+  
+script:
+  - docker build --tag quay.io/compdatasci/base base
+  - docker build --tag quay.io/compdatasci/r-notebook r-notebook
+  - docker build --tag quay.io/compdatasci/octave-notebook octave-notebook
+  - docker build --tag quay.io/compdatasci/odepack-notebook odepack-notebook
+  - docker build --tag quay.io/compdatasci/scipy-notebook scipy-notebook
+  - docker build --tag quay.io/compdatasci/pandas-notebook pandas-notebook
+  - docker images

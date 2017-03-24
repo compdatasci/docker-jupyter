@@ -15,7 +15,7 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD5
     add-apt-repository 'deb [arch=amd64,i386] https://cran.rstudio.com/bin/linux/ubuntu xenial/' && \
     apt-get update && \
     apt-get upgrade -y -o Dpkg::Options::="--force-confold" && \
-    apt-get install -y r-base \
+    apt-get install -y --no-install-recommends r-base \
             libssl-dev \
             libcairo2-dev \
             libcurl4-openssl-dev && \
@@ -30,9 +30,9 @@ RUN R --no-save < install_irkernel.R
 # Clean Up
 RUN rm -rf /tmp/* /var/tmp/*
 
-USER $CDSUSER
+USER $DOCKER_USER
 
 # Print something nice on entry.
-COPY WELCOME $CDSHOME/WELCOME
+COPY WELCOME $DOCKER_HOME/WELCOME
 
 USER root

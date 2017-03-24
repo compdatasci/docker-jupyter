@@ -3,13 +3,14 @@
 # with the UID on the host. This is useful for Linux users, Mac and Windows
 # already do transparent mapping of shared volumes.
 if [ "$HOST_UID" ]; then
-    usermod -u $HOST_UID compdatasci
+    usermod -u $HOST_UID $DOCKER_USER
 fi
 if [ "$HOST_GID" ]; then
-    groupmod -g $HOST_GID compdatasci
+    groupmod -g $HOST_GID $DOCKER_GROUP
 fi
-# This makes sure that all files in /home/compdatasci are accessible by the user
-# compdatasci. We exclude the folder ~/shared to reduce IO out to the host. Docker
+
+# This makes sure that all files in $DOCKER_HOME are accessible by the user. 
+# We exclude the folder ~/shared to reduce IO out to the host. Docker
 # for Mac, Docker for Windows and the UID/GID trick above should mean that file
 # permissions work seamlessly now.
-find /home/compdatasci -maxdepth 1 | sed "1d" | grep -v "/home/compdatasci/shared" | xargs chown -R compdatasci:compdatasci 2> /dev/null || true
+find $DOCKER_HOME -maxdepth 1 | sed "1d" | grep -v "$DOCKER_HOME/shared" | xargs chown -R $DOCKER_USER:$DOCKER_GROUP 3> /dev/null || true
