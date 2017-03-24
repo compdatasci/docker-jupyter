@@ -31,6 +31,8 @@ ENV LC_ALL=C.UTF-8 \
 
 # Install pip
 RUN apt-get install -y --no-install-recommends \
+            build-essential \
+            python-dev \
             python-pip \
             pandoc && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
