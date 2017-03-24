@@ -35,7 +35,7 @@ RUN apt-get install -y --no-install-recommends \
             python-pip \
             python3-pip \
             pandoc \
-            ttf-dejavu ttf-dejavu-mono-udeb && \
+            ttf-dejavu && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install jupyter and ipywidgets
