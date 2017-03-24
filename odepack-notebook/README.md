@@ -1,8 +1,8 @@
 ## Docker Image for Octave with ODE package and Jupyter Notebook.
 
-This Docker image is for Octave with ODE package and Jupyter Notebook. This images inherits [compdatasci/octave-notebook](https://quay.io/repository/compdatasci/octave-notebook). 
+This Docker image is for Octave with ODE package and Jupyter Notebook. This images inherits [compdatasci/octave-notebook](https://hub.docker.com/r/compdatasci/octave-notebook). 
 
-[![Docker Repository on Quay](https://quay.io/repository/compdatasci/odepack-notebook/status "Docker Repository on Quay")](https://quay.io/repository/compdatasci/odepack-notebook)
+[![Docker Repository on Quay](https://quay.io/repository/compdatasci/odepack-notebook/status "Docker Repository on Quay")](https://hub.docker.com/r/compdatasci/odepack-notebook)
 
 ## Running Jupyter Notebook
 
@@ -19,7 +19,7 @@ The `docker-notebook` script can be downloaded at <https://github.com/compdatasc
 If your version of Windows does not support Docker, you may need to [install Docker Toolbox](https://docs.docker.com/toolbox/toolbox_install_windows/) instead. After you have installed Docker Toolbox, start it and run the following command in a Docker Toolbox terminal in your work directory:
 ```
      docker run --rm -w /home/compdatasci/shared -v $(pwd):/home/compdatasci/shared -d -p \
-    $(docker-machine ip $(docker-machine active)):8088:8088 quay.io/compdatasci/odepack-notebook \
+    $(docker-machine ip $(docker-machine active)):8088:8088 compdatasci/odepack-notebook \
     'jupyter-notebook --no-browser --ip=0.0.0.0 --port=8088'
 ```
 
@@ -40,11 +40,11 @@ When you have finished using Jupyter Notebook, use Control-C to stop this server
 You can also run the image as a Linux environment for Odepack. You can run the image using the following command:
 
     docker run --rm -ti -w/home/compdatasci/shared -v $(pwd):/home/compdatasci/shared \
-    quay.io/compdatasci/odepack-notebook:latest
+    compdatasci/odepack-notebook:latest
 
 which would share your current working directory into the container as `~/shared`. *Note that you should only save files under the shared directory because all other files will be lost when the process ends.*
 
 Users with SELinux-enabled Linux distributions (Redhat, Fedora, CentOS, and others) will need to add the `:z` flag to the volume mount, e.g.:
 
     docker run --rm -ti -w/home/compdatasci/shared -v $(pwd):/home/compdatasci/shared:z \
-    quay.io/compdatasci/odepack-notebook:latest
+    compdatasci/odepack-notebook:latest

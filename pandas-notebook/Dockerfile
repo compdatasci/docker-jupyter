@@ -1,12 +1,12 @@
 # Builds a Docker image for Pandas with Jupyter Notebook.
 #
 # It can be found at:
-#   https://quay.io/repository/compdatasci/pandas-notebook
+#   https://hub.docker.com/r/compdatasci/pandas-notebook
 #
 # Authors:
 # Xiangmin Jiao <xiangmin.jiao@stonybrook.edu>
 
-FROM quay.io/compdatasci/scipy-notebook
+FROM compdatasci/scipy-notebook
 LABEL maintainer "Xiangmin Jiao <xiangmin.jiao@stonybrook.edu>"
 
 # Install pandas

@@ -1,8 +1,8 @@
 ## Docker Image for Octave with Jupyter Notebook.
 
-This Docker image is for Octave 4.0 with Jupyter Notebook. This images inherits [compdatasci/base](https://quay.io/repository/compdatasci/base). 
+This Docker image is for Octave 4.0 with Jupyter Notebook. This images inherits [compdatasci/base](https://hub.docker.com/r/compdatasci/base). 
 
-[![Docker Repository on Quay](https://quay.io/repository/compdatasci/octave-notebook/status "Docker Repository on Quay")](https://quay.io/repository/compdatasci/octave-notebook)
+[![Docker Repository on Quay](https://quay.io/repository/compdatasci/octave-notebook/status "Docker Repository on Quay")](https://hub.docker.com/r/compdatasci/octave-notebook)
 
 ## Running Jupyter Notebook with Docker
 
@@ -20,7 +20,7 @@ The `docker-notebook` script can be downloaded at <https://github.com/compdatasc
 If your version of Windows does not support Docker, you may need to [install Docker Toolbox](https://docs.docker.com/toolbox/toolbox_install_windows/) instead. After you have installed Docker Toolbox, start it and run the following command in a Docker Toolbox terminal in your work directory:
 ```
      docker run --rm -w /home/compdatasci/shared -v $(pwd):/home/compdatasci/shared -d -p \
-    $(docker-machine ip $(docker-machine active)):8088:8088 quay.io/compdatasci/octave-notebook \
+    $(docker-machine ip $(docker-machine active)):8088:8088 compdatasci/octave-notebook \
     'jupyter-notebook --no-browser --ip=0.0.0.0 --port=8088'
 ```
 
@@ -41,11 +41,11 @@ When you have finished using Jupyter Notebook, use Control-C to stop this server
 You can also run the image as a Linux environment for Octave. You can run the image using the following command:
 
     docker run --rm -ti -w/home/compdatasci/shared -v $(pwd):/home/compdatasci/shared \
-    quay.io/compdatasci/octave-notebook:latest
+    compdatasci/octave-notebook:latest
 
 which would share your current working directory into the container as `~/shared`. *Note that you should only save files under the shared directory because all other files will be lost when the process ends.*
 
 Users with SELinux-enabled Linux distributions (Redhat, Fedora, CentOS, and others) will need to add the `:z` flag to the volume mount, e.g.:
 
     docker run --rm -ti -w/home/compdatasci/shared -v $(pwd):/home/compdatasci/shared:z \
-    quay.io/compdatasci/octave-notebook:latest
+    compdatasci/octave-notebook:latest

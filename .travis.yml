@@ -2,12 +2,16 @@ sudo: required
 
 services:
   - docker
-  
 script:
-  - docker build --tag quay.io/compdatasci/base base
-  - docker build --tag quay.io/compdatasci/r-notebook r-notebook
-  - docker build --tag quay.io/compdatasci/octave-notebook octave-notebook
-  - docker build --tag quay.io/compdatasci/odepack-notebook odepack-notebook
-  - docker build --tag quay.io/compdatasci/scipy-notebook scipy-notebook
-  - docker build --tag quay.io/compdatasci/pandas-notebook pandas-notebook
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_USERPASS"
+  - docker build --tag compdatasci/base base && docker push compdatasci/base
+  - docker build --tag compdatasci/r-notebook r-notebook && docker push compdatasci/r-notebook 
+  - docker build --tag compdatasci/octave-notebook octave-notebook && docker push compdatasci/octave-notebook 
+  - docker build --tag compdatasci/odepack-notebook odepack-notebook && docker push compdatasci/odepack-notebook
+  - docker build --tag compdatasci/scipy-notebook scipy-notebook && docker push compdatasci/scipy-notebook
+  - docker build --tag compdatasci/pandas-notebook pandas-notebook && docker push compdatasci/pandas-notebook
   - docker images
+env:
+  global:
+  - secure: EsUtBDhE0++8gm8/ZdEIr/MLsINO9VMaMHTrvQpli10nEBjGR04xburqWcGIFBsU4pjvK0zcgzGKQ42Tire5YmhQHmuzQtlYekPDlzmhPbtO121/l/uSk1sapUYuTuigcqhwwtYyKK6t8ClVfeEBYt1EARC4wm2CgNZmp2q8xrHy02ofEdSrWF0tuj2E6YHx9yBM+47p5fJDwUV1Vxb1FV1Y1RSnLLChbW06YjmvIm9zX3Ch4EZEIuQHVn20mLJZEBTAEwgBXYqZ5E/17EK91aRp3ojgTJ9MPM3PxInmonzY0RsyqY84A//J6paJzQ6D4hRvQXeYTbT5JX4a1GDZT/JAwwnRAHBD0CmvBGi1EiFLDHNW7wF5yNlZTpWhByKJcfBWE/R8nvLGpiZm9AkATHkWKjgkrtyk+B8g6y/1PntfxICIoWRY9BCznNxKpzBE4ThdBSFsKZWVg3Dk5WCKTeuZh95aV9CsDQzYiHvER4PeTsqJ1BdhStYipElqaRLmafts4WbTs3qPvgRa3RLMOjFLSST0Bwd5tZcBSQhKz/PmyHvDnj907H2DK70ASBML3JzNWnPV9YglTBAVNvMvWh2IE+XB/ppc1sfJfgi8liHZ2mo1BUBnIRfjoFYHviajJ4QaR4RrB902NSOBb6S/vAdeNdci9JEcP4rXB/sXgvM=
+  - secure: GYi+mu3jmHP64ryjgYqgjWhSkk5GQ0eBYCdAD8EC2ktotVHMvYu9T89E8C7G2iBOAmzBdAagqXEuZK3EQsdUz36Xp1AJXRnGlfNwO7j502pklFZwhSzePwhN7xEK2KkJW2toyOaJ79PqYi89Izfm+FSFDXMtBwjmb0DyKXlSoPAddGa1mnjV8QvVRBDtOOwD/fo+tWxmsd13uodr4KYzvP/8kgTx20qEpxSegJCVdlT+V1qloIJ00T9zZdqnhtqEsOdy7GInJwjXmVirZ45OkMPyo6jj3TTstDHpUGMnOUMOUEecTvwL5UDv0sid4zgyrl85wdmn8L1IGh3S0a6JvG8dr3zLCvTOnVJUqFHM16CkrbGGLsV+SgeVJK+raVCQ1+sfdIsQdOHK8f4+H9qFvwtwlHXOV2vD4aqp6qLSEzhP4HEXr8iZJyqHgfKZaf0kQ3kOdXgmO6ExrZKjBRx1uBKlHdttbCJCMjN26F83r2HNwGh21RxouJq6sG00X/Ie0uX1ytIdV9OvdAAX3UI686V3/N3dKL+EubsVIEVlwyHF4mOyO9R6wDvOM3mN3wHWtOhqydsioCFpgOcedGTJZvjhGdFSbqYKtYhGoYgCfWDKp1WWKO5TTuBSAOguDknk0IcKKDAcM3DGth8LtLqo2Bsha8mOBFhZMD6uthLYdMo=

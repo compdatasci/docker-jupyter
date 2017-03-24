@@ -1,12 +1,12 @@
 # Builds a Docker image for Octave with odepkg and Jupyter Notebook.
 #
 # It can be found at:
-#   https://quay.io/repository/compdatasci/odepack-notebook
+#   https://hub.docker.com/r/compdatasci/odepack-notebook
 #
 # Authors:
 # Xiangmin Jiao <xiangmin.jiao@stonybrook.edu>
 
-FROM quay.io/compdatasci/octave-notebook
+FROM compdatasci/octave-notebook
 LABEL maintainer "Xiangmin Jiao <xiangmin.jiao@stonybrook.edu>"
 
 # Install octave-sybolic and octave-odepkg

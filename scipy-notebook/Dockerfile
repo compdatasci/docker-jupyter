@@ -1,12 +1,12 @@
 # Builds a Docker image for SciPy with Jupyter Notebook. 
 #
 # It can be found at:
-#   https://quay.io/repository/compdatasci/scipy-notebook
+#   https://hub.docker.com/r/compdatasci/scipy-notebook
 #
 # Authors:
 # Xiangmin Jiao <xiangmin.jiao@stonybrook.edu>
 
-FROM quay.io/compdatasci/base
+FROM compdatasci/base
 LABEL maintainer "Xiangmin Jiao <xiangmin.jiao@stonybrook.edu>"
 
 # Install scipy

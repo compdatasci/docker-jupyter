@@ -6,7 +6,7 @@
 # Although this image is not used directly by end-users, it can be
 # found at:
 #
-#   https://quay.io/organization/compdatasci/base
+#   https://hub.docker.com/r/compdatasci/base
 #
 # Authors:
 # Xiangmin Jiao <xiangmin.jiao@stonybrook.edu>
@@ -32,6 +32,7 @@ ENV LC_ALL=C.UTF-8 \
 # Install pip
 RUN apt-get install -y --no-install-recommends \
             python-pip \
+            setuptools \
             pandoc && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
