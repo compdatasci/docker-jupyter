@@ -14,7 +14,7 @@ USER root
 RUN apt-get update && \
     apt-get upgrade -y -o Dpkg::Options::="--force-confold" && \
     apt-get install -y --no-install-recommends \
-            python-sympy python3-sympy && \
+            python-sympy python3-sympy \
             python-scipy python3-scipy && \
     rm -rf /var/lib/apt/lists/*
 
