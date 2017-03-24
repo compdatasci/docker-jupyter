@@ -14,7 +14,7 @@ USER root
 RUN apt-get update && \
     apt-get upgrade -y -o Dpkg::Options::="--force-confold" && \
     apt-get install -y --no-install-recommends octave \
-        octave-symbol \
+        octave-symbolic \
         octave-odepkg \
         gnuplot && \
     rm -rf /var/lib/apt/lists/*
