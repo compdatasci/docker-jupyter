@@ -12,14 +12,8 @@ LABEL maintainer "Xiangmin Jiao <xiangmin.jiao@stonybrook.edu>"
 # Install scipy, sympy, and pandas
 USER root
 
-RUN pip3 install -U sympy scipy pandas
-
-# Clean Up
-RUN rm -rf /tmp/* /var/tmp/*
-
-USER $DOCKER_USER
-
-# Print something nice on entry.
-COPY WELCOME $DOCKER_HOME/WELCOME
-
-USER root
+RUN pip3 install -U \
+    sympy \
+    scipy \
+    pandas && \
+    rm -rf /tmp/* /var/tmp/*

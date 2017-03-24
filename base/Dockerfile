@@ -14,48 +14,47 @@
 FROM phusion/baseimage:0.9.20
 LABEL maintainer "Xiangmin Jiao <xiangmin.jiao@stonybrook.edu>"
 
-# Get Ubuntu updates
+# Get Ubuntu updates, pip, etc.
+# Install jupyter, ipywidgets 
+# jupyter_latex_envs version 1.3.7.2 for Jupyter Notebook
+# Install spell checker for Jupyter Notebook
 USER root
 RUN apt-get update && \
     apt-get upgrade -y -o Dpkg::Options::="--force-confold" && \
     apt-get install -y --no-install-recommends \
             locales \
-            sudo && \
-    echo "C.UTF-8 UTF-8" > /etc/locale.gen && \
-    locale-gen
-
-# Set locale environment
-ENV LC_ALL=C.UTF-8 \
-    LANG=C.UTF-8 \
-    LANGUAGE=C.UTF-8
-
-# Install pip for python3
-RUN apt-get install -y --no-install-recommends \
+            sudo \
             build-essential \
             python-pip \
             python3-pip \
             pandoc \
             ttf-dejavu && \
+    echo "C.UTF-8 UTF-8" > /etc/locale.gen && \
+    locale-gen && \
+    pip3 install -U pip \
+         setuptools && \
+    pip3 install -U \
+         jupyter \
+         ipywidgets && \
+    jupyter nbextension install --py --system \
+         widgetsnbextension && \
+    jupyter nbextension enable --py --system \
+         widgetsnbextension && \
+    pip3 install -U \
+        jupyter_latex_envs==1.3.7.2 && \
+    jupyter nbextension install --py --system \
+        latex_envs && \
+    jupyter nbextension enable --py --system \
+        latex_envs && \
+    jupyter nbextension install --system \
+        https://bitbucket.org/ipre/calico/downloads/calico-spell-check-1.0.zip && \
+    jupyter nbextension install --system \
+        https://bitbucket.org/ipre/calico/downloads/calico-document-tools-1.0.zip && \
+    jupyter nbextension install --system \
+        https://bitbucket.org/ipre/calico/downloads/calico-cell-tools-1.0.zip && \
+    jupyter nbextension enable --system \
+        calico-spell-check && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-# Install jupyter and ipywidgets
-RUN pip3 install -U pip setuptools
-
-RUN pip3 install -U jupyter ipywidgets && \
-    jupyter nbextension install --py --system widgetsnbextension && \
-    jupyter nbextension enable --py --system widgetsnbextension
-
-# Install jupyter_latex_envs version 1.3.7.2 for Jupyter Notebook
-RUN pip3 install -U jupyter_latex_envs==1.3.7.2 && \
-    jupyter nbextension install --py --system latex_envs && \
-    jupyter nbextension enable --py --system latex_envs
-
-# Install spell checker for Jupyter Notebook
-RUN jupyter nbextension install --system https://bitbucket.org/ipre/calico/downloads/calico-spell-check-1.0.zip && \
-    jupyter nbextension install --system https://bitbucket.org/ipre/calico/downloads/calico-document-tools-1.0.zip && \
-    jupyter nbextension install --system https://bitbucket.org/ipre/calico/downloads/calico-cell-tools-1.0.zip && \
-    jupyter nbextension enable --system calico-spell-check && \
-    rm -rf /tmp/* /var/tmp/*
 
 ADD image /
 
@@ -63,14 +62,17 @@ ADD image /
 # Customization for user and location
 ########################################################
 
-# Change the default timezone to America/New_York
-RUN ln -s -f /usr/share/zoneinfo/America/New_York /etc/localtime && \
-    echo "America/New_York" > /etc/timezone
+# Set locale environment
+ENV LC_ALL=C.UTF-8 \
+    LANG=C.UTF-8 \
+    LANGUAGE=C.UTF-8
 
 ENV DOCKER_USER=compdatasci
-ENV DOCKER_GROUP=$DOCKER_USER
-ENV DOCKER_HOME=/home/$DOCKER_USER
-ENV HOME=$DOCKER_HOME
+ENV DOCKER_GROUP=$DOCKER_USER \
+    DOCKER_HOME=/home/$DOCKER_USER \
+    HOME=/home/$DOCKER_USER
+
+# Change the default timezone to America/New_York
 
 # Set up user so that we do not run as root
 # See https://github.com/phusion/baseimage-docker/issues/186
@@ -78,23 +80,20 @@ ENV HOME=$DOCKER_HOME
 # Add script to set up permissions of home directory on myinit
 # Run ldconfig so that /usr/local/lib is in the default search
 # path for the dynamic linker.
-RUN useradd -m -s /bin/bash -G sudo,docker_env $DOCKER_USER && \
+RUN ln -s -f /usr/share/zoneinfo/America/New_York /etc/localtime && \
+    echo "America/New_York" > /etc/timezone && \
+    useradd -m -s /bin/bash -G sudo,docker_env $DOCKER_USER && \
     echo "$DOCKER_USER:docker" | chpasswd && \
     echo "$DOCKER_USER ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     touch /etc/service/syslog-forwarder/down && \
-    echo "cat $DOCKER_HOME/WELCOME" >> /$DOCKER_HOME/.bashrc && \
-    ldconfig
-
-USER $DOCKER_USER
-RUN touch $DOCKER_HOME/.sudo_as_admin_successful && \
-    mkdir $DOCKER_HOME/shared
+    ldconfig && \
+    touch $DOCKER_HOME/.sudo_as_admin_successful && \
+    mkdir $DOCKER_HOME/shared && \
+    /etc/my_init.d/set-home-permissions.sh
 
 VOLUME $DOCKER_HOME/shared
-
-# Print something nice on entry.
-COPY WELCOME $DOCKER_HOME/WELCOME
-
 WORKDIR $DOCKER_HOME
+
 USER root
 ENTRYPOINT ["/sbin/my_init","--quiet","--","/sbin/setuser","compdatasci","/bin/bash","-l","-c"]
 CMD ["/bin/bash","-l","-i"]

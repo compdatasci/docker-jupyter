@@ -9,27 +9,17 @@
 FROM compdatasci/base
 LABEL maintainer "Xiangmin Jiao <xiangmin.jiao@stonybrook.edu>"
 
-# Install octave (liboctave-dev is not installed to save space.)
+# Install octave and octave_kernel (liboctave-dev is not installed to save space.)
 USER root
 RUN apt-get update && \
     apt-get upgrade -y -o Dpkg::Options::="--force-confold" && \
-    apt-get install -y --no-install-recommends octave \
+    apt-get install -y --no-install-recommends \
+        octave \
         octave-symbolic \
         octave-odepkg \
         ghostscript \
         gnuplot && \
-    rm -rf /var/lib/apt/lists/*
-
-# Install latex_envs for Jupyter Notebook
-RUN pip3 install -U octave_kernel && \
-    python3 -m octave_kernel.install
-
-# Clean Up
-RUN rm -rf /tmp/* /var/tmp/*
-
-USER $DOCKER_USER
-
-# Print something nice on entry.
-COPY WELCOME $DOCKER_HOME/WELCOME
-
-USER root
+    pip3 install -U \
+        octave_kernel && \
+    python3 -m octave_kernel.install && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
