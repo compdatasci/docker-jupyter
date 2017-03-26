@@ -6,7 +6,7 @@
 # Authors:
 # Xiangmin Jiao <xmjiao@gmail.com>
 
-FROM compdatasci/base
+FROM quay.io/compdatasci/base
 LABEL maintainer "Xiangmin Jiao <xmjiao@gmail.com>"
 
 # Install octave and octave_kernel (liboctave-dev is not installed to save space.)

@@ -3,7 +3,6 @@ services:
 
 script:
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_USERPASS"
-  - docker build --tag compdatasci/base base && docker push compdatasci/base || exit $?
   - docker build --tag compdatasci/r-notebook r-notebook && docker push compdatasci/r-notebook
   - docker build --tag compdatasci/octave-notebook octave-notebook && docker push compdatasci/octave-notebook
   - docker build --tag compdatasci/scipy-notebook scipy-notebook && docker push compdatasci/scipy-notebook
