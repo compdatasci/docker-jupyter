@@ -3,9 +3,8 @@ services:
 
 script:
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_USERPASS"
-  - docker login -u "$QUAY_USERNAME" -p "$QUAY_USERPASS" quay.io
-  - docker build --tag compdatasci/base --tag quay.io/compdatasci/base base && docker push compdatasci/base && docker push quay.io/compdatasci/base || exit $?
-  - docker build --tag compdatasci/r-notebook --tag quay.io/compdatasci/r-notebook r-notebook && docker push compdatasci/r-notebook && docker push quay.io/compdatasci/r-notebook
-  - docker build --tag compdatasci/octave-notebook --tag quay.io/compdatasci/octave-notebook octave-notebook && docker push compdatasci/octave-notebook && docker push quay.io/compdatasci/octave-notebook
-  - docker build --tag compdatasci/scipy-notebook --tag quay.io/compdatasci/scipy-notebook scipy-notebook && docker push compdatasci/scipy-notebook && docker push quay.io/compdatasci/scipy-notebook
+  - docker build --tag compdatasci/base base && docker push compdatasci/base || exit $?
+  - docker build --tag compdatasci/r-notebook r-notebook && docker push compdatasci/r-notebook
+  - docker build --tag compdatasci/octave-notebook octave-notebook && docker push compdatasci/octave-notebook
+  - docker build --tag compdatasci/scipy-notebook scipy-notebook && docker push compdatasci/scipy-notebook
   - docker images
