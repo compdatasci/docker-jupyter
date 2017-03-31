@@ -16,7 +16,7 @@ LABEL maintainer "Xiangmin Jiao <xmjiao@gmail.com>"
 
 # Get Ubuntu updates, pip, etc.
 # Install jupyter, ipywidgets 
-# jupyter_latex_envs version 1.3.7.2 for Jupyter Notebook
+# jupyter_latex_envs version 1.3.8.4 for Jupyter Notebook
 # Install spell checker for Jupyter Notebook
 USER root
 WORKDIR /tmp
@@ -43,7 +43,7 @@ RUN apt-get update && \
     jupyter nbextension enable --py --system \
          widgetsnbextension && \
     pip3 install -U \
-        jupyter_latex_envs==1.3.7.2 && \
+        jupyter_latex_envs=1.3.8.4 && \
     jupyter nbextension install --py --system \
         latex_envs && \
     jupyter nbextension enable --py --system \
@@ -63,11 +63,6 @@ ADD image /
 ########################################################
 # Customization for user and location
 ########################################################
-
-# Set locale environment
-ENV LC_ALL=C.UTF-8 \
-    LANG=C.UTF-8 \
-    LANGUAGE=C.UTF-8
 
 ENV DOCKER_USER=compdatasci
 ENV DOCKER_GROUP=$DOCKER_USER \
@@ -93,7 +88,6 @@ RUN echo "America/New_York" > /etc/timezone && \
     mkdir $DOCKER_HOME/shared && \
     chown -R $DOCKER_USER:$DOCKER_GROUP $DOCKER_HOME
 
-VOLUME $DOCKER_HOME/shared
 WORKDIR $DOCKER_HOME
 
 USER root

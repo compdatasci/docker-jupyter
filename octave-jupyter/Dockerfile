@@ -9,21 +9,24 @@
 FROM quay.io/compdatasci/base
 LABEL maintainer "Xiangmin Jiao <xmjiao@gmail.com>"
 
-# Install octave and octave_kernel (liboctave-dev is not installed to save space.)
+# Install octave, liboctave-dev, symbolic and odepkg
 USER root
 WORKDIR /tmp
 
-RUN apt-get update && \
-    apt-get upgrade -y -o Dpkg::Options::="--force-confold" && \
+# Install latest version of octave
+RUN apt-add-repository ppa:octave/stable && \
+    apt-get update && \
     apt-get install -y --no-install-recommends \
-        octave \
-        octave-symbolic \
-        octave-odepkg \
-        ghostscript \
-        gnuplot && \
-    pip3 install -U \
-        octave_kernel && \
-    python3 -m octave_kernel.install && \
+        build-essential make \
+        octave liboctave-dev \
+        gnuplot-x11 \
+        libopenblas-base libatlas3-base \
+        pstoedit octave-info && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+USER $DOCKER_USER
+
+RUN octave --no-gui --eval "pkg install -forge symbolic odepkg"
+
+USER root
 WORKDIR $DOCKER_HOME

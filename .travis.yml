@@ -4,7 +4,7 @@ services:
 script:
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_USERPASS"
   - docker build --tag quay.io/compdatasci/base base || exie -1
-  - docker build --tag compdatasci/r-notebook r-notebook && docker push compdatasci/r-notebook
-  - docker build --tag compdatasci/octave-notebook octave-notebook && docker push compdatasci/octave-notebook
-  - docker build --tag compdatasci/scipy-notebook scipy-notebook && docker push compdatasci/scipy-notebook
+  - docker build --tag compdatasci/r-jupyter r-jupyter && docker push compdatasci/r-jupyter
+  - docker build --tag compdatasci/octave-jupyter octave-jupyter && docker push compdatasci/octave-jupyter
+  - docker build --tag compdatasci/scipy-jupyter scipy-jupyter && docker push compdatasci/scipy-jupyter
   - docker images

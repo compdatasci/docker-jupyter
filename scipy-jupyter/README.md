@@ -1,23 +1,23 @@
-## Docker Image for Data Computing with Jupyter Notebook.
+## Docker Image for SciPy with Jupyter Notebook.
 
-This Docker image is for R with Jupyter Notebook. This images inherits [compdatasci/base](https://hub.docker.com/r/compdatasci/base). 
+This Docker image is for SciPy with Jupyter Notebook. This images inherits [compdatasci/base](https://hub.docker.com/repository/compdatasci/base). 
 
-## Running Jupyter Notebook with Docker
+## Running Jupyter Notebook
 
 To install Docker for your platform (Windows, MacOS, Linux, cloud platforms, etc.), follow the instructions at [docker.com](https://docs.docker.com/engine/getstarted/step_one/).
 
-Once you have Docker installed, you can start Jupyter Notebook using the following command in the directory that contains your notebooks:
+Once you have Docker installed, you can start Jupyter Notebook using the following command in the directory that contains your notebook (e.g., scipy-intro.ipynb):
 ```
-    docker-notebook mynotebook.ipynb
+    docker-jupyter -i scipy-jupyter scipy-intro.ipynb
 ```
-where the `docker-notebook` script can be downloaded at <https://github.com/datacompsci/r-dockerfiles/raw/master/docker-notebook>.
+The `docker-jupyter` script can be downloaded at <https://github.com/compdatasci/dockerfiles/raw/master/docker-jupyter>.
 
 ## Running Jupyter Notebook with Docker Toolbox
 
 If your version of Windows does not support Docker, you may need to [install Docker Toolbox](https://docs.docker.com/toolbox/toolbox_install_windows/) instead. After you have installed Docker Toolbox, start it and run the following command in a Docker Toolbox terminal in your work directory:
 ```
      docker run --rm -w /home/compdatasci/shared -v $(pwd):/home/compdatasci/shared -d -p \
-    $(docker-machine ip $(docker-machine active)):8088:8088 compdatasci/r-notebook \
+    $(docker-machine ip $(docker-machine active)):8088:8088 compdatasci/scipy-jupyter \
     'jupyter-notebook --no-browser --ip=0.0.0.0 --port=8088'
 ```
 
@@ -35,14 +35,14 @@ When you have finished using Jupyter Notebook, use Control-C to stop this server
 
 ## Running as Linux environment
 
-You can also run the image as a Linux environment for R. You can run the image using the following command:
+You can also run the image as a Linux environment for SciPy. You can run the image using the following command:
 
     docker run --rm -ti -w/home/compdatasci/shared -v $(pwd):/home/compdatasci/shared \
-    compdatasci/r-notebook:latest
+    compdatasci/scipy-jupyter:latest
 
 which would share your current working directory into the container as `~/shared`. *Note that you should only save files under the shared directory because all other files will be lost when the process ends.*
 
 Users with SELinux-enabled Linux distributions (Redhat, Fedora, CentOS, and others) will need to add the `:z` flag to the volume mount, e.g.:
 
     docker run --rm -ti -w/home/compdatasci/shared -v $(pwd):/home/compdatasci/shared:z \
-    compdatasci/r-notebook:latest
+    compdatasci/scipy-jupyter:latest
