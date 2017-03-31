@@ -43,7 +43,7 @@ RUN apt-get update && \
     jupyter nbextension enable --py --system \
          widgetsnbextension && \
     pip3 install -U \
-        jupyter_latex_envs=1.3.8.4 && \
+        jupyter_latex_envs==1.3.8.4 && \
     jupyter nbextension install --py --system \
         latex_envs && \
     jupyter nbextension enable --py --system \
