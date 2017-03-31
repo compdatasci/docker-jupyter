@@ -9,11 +9,10 @@
 FROM quay.io/compdatasci/base
 LABEL maintainer "Xiangmin Jiao <xmjiao@gmail.com>"
 
-# Install octave, liboctave-dev, symbolic and odepkg
 USER root
 WORKDIR /tmp
 
-# Install latest version of octave
+# Install octave, octave_kernel, liboctave-dev, symbolic and odepkg
 RUN apt-add-repository ppa:octave/stable && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
@@ -21,7 +20,10 @@ RUN apt-add-repository ppa:octave/stable && \
         octave liboctave-dev \
         gnuplot-x11 \
         libopenblas-base libatlas3-base \
-        pstoedit octave-info && \
+        ghostscript pstoedit octave-info && \
+    pip3 install -U \
+        octave_kernel && \
+    python3 -m octave_kernel.install && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 USER $DOCKER_USER
