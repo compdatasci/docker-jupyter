@@ -2,7 +2,7 @@
 
 This Docker image is for SciPy with Jupyter Notebook. This images inherits [compdatasci/base](https://hub.docker.com/repository/compdatasci/base). 
 
-[![Docker Image](https://images.microbadger.com/badges/version/compdatasci/scipy-jupyter.svg)](https://microbadger.com/images/compdatasci/scipy-jupyter)
+[![Docker Image](https://images.microbadger.com/badges/image/compdatasci/scipy-jupyter.svg)](https://microbadger.com/images/compdatasci/scipy-jupyter)
 
 ## Running Jupyter Notebook
 
