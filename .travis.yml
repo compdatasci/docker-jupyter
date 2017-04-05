@@ -3,6 +3,6 @@ services:
 
 script:
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_USERPASS"
-  - git clone -b master git@github.com:compdatasci/dockerfiles.git dockerfiles
+  - git clone -b master https://github.com/compdatasci/dockerfiles.git dockerfiles
   - docker build --tag compdatasci/r-jupyter dockerfiles/r-jupyter && docker push compdatasci/r-jupyter && curl -X POST https://registry.hub.docker.com/u/compdatasci/r-jupyter/trigger/$TOKEN_R/ && touch success
   - docker images
