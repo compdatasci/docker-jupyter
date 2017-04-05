@@ -97,8 +97,8 @@ RUN apt-get update && \
 
 USER $DOCKER_USER
 
-# Install symbolic and odepkg
-RUN octave --no-gui --eval "pkg install -forge symbolic odepkg"
+# Install symbolic. odepkg fails to compile.
+RUN octave --no-gui --eval "pkg install -forge symbolic"
 
 USER root
 WORKDIR $DOCKER_HOME
