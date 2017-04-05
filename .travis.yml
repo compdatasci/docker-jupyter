@@ -3,6 +3,6 @@ services:
 
 script:
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_USERPASS"
-  - git clone -b master git@github.com:compdatasci/dockerfiles.git dockerfiles
+  - git clone -b master https://github.com/compdatasci/dockerfiles.git dockerfiles
   - docker build --tag compdatasci/scipy-jupyter dockerfiles/scipy-jupyter && docker push compdatasci/scipy-jupyter && curl -X POST https://registry.hub.docker.com/u/compdatasci/scipy-jupyter/trigger/$TOKEN_SCIPY/ && touch success
   - docker images
