@@ -21,7 +21,7 @@ RUN apt-add-repository ppa:octave/stable && \
         gnuplot-x11 \
         libopenblas-base libatlas3-base \
         ghostscript pstoedit octave-info && \
-    pip install -U \
+    pip2 install -U \
          sympy && \
     pip3 install -U \
         octave_kernel && \

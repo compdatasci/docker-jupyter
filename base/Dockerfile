@@ -31,7 +31,7 @@ RUN apt-get update && \
             python3-pip \
             pandoc \
             ttf-dejavu && \
-    pip install -U pip \
+    pip2 install -U pip \
          setuptools && \
     pip3 install -U pip \
          setuptools && \
