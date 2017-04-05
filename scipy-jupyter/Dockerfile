@@ -6,7 +6,7 @@
 # Authors:
 # Xiangmin Jiao <xmjiao@gmail.com>
 
-FROM quay.io/compdatasci/base
+FROM compdatasci/base
 LABEL maintainer "Xiangmin Jiao <xmjiao@gmail.com>"
 
 # Install scipy, sympy, and pandas

@@ -6,7 +6,7 @@
 # Authors:
 # Xiangmin Jiao <xmjiao@gmail.com>
 
-FROM quay.io/compdatasci/base
+FROM compdatasci/base
 LABEL maintainer "Xiangmin Jiao <xmjiao@gmail.com>"
 
 USER root
@@ -18,7 +18,7 @@ RUN apt-add-repository ppa:octave/stable && \
     apt-get install -y --no-install-recommends \
         build-essential make \
         octave liboctave-dev \
-        gnuplot-x11 \
+        gnuplot-qt \
         libopenblas-base libatlas3-base \
         ghostscript pstoedit octave-info && \
     pip3 install -U \
