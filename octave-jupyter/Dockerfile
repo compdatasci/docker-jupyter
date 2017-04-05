@@ -84,7 +84,7 @@ RUN apt-get update && \
         uuid-dev && \
     curl -s ftp://ftp.gnu.org/gnu/octave/octave-4.2.1.tar.gz | tar zx && \
     cd octave-4* && \
-    ./configure --prefix=/usr/local \
+    ./configure --prefix=/usr/local && \
     make && \
     make install && \
     make check && \
