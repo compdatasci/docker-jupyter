@@ -13,11 +13,10 @@ USER root
 WORKDIR /tmp
 
 # Install octave and octave_kernel
-RUN apt-add-repository ppa:octave/stable && \
-    apt-get update && \
+RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         build-essential make \
-        octave \
+        octave liboctave-dev \
         gnuplot-x11 \
         libopenblas-base libatlas3-base \
         ghostscript pstoedit && \
