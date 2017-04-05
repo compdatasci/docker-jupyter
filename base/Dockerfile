@@ -31,8 +31,8 @@ RUN apt-get update && \
             python3-pip \
             pandoc \
             ttf-dejavu && \
-    echo "C.UTF-8 UTF-8" > /etc/locale.gen && \
-    locale-gen && \
+    pip install -U pip \
+         setuptools && \
     pip3 install -U pip \
          setuptools && \
     pip3 install -U \

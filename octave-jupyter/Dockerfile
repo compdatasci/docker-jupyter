@@ -18,9 +18,11 @@ RUN apt-add-repository ppa:octave/stable && \
     apt-get install -y --no-install-recommends \
         build-essential make \
         octave liboctave-dev \
-        gnuplot-qt \
+        gnuplot-x11 \
         libopenblas-base libatlas3-base \
         ghostscript pstoedit octave-info && \
+    pip install -U \
+         sympy && \
     pip3 install -U \
         octave_kernel && \
     python3 -m octave_kernel.install && \
