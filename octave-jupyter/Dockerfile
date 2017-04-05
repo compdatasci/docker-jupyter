@@ -85,7 +85,7 @@ RUN apt-get update && \
     curl -s ftp://ftp.gnu.org/gnu/octave/octave-4.2.1.tar.gz | tar zx && \
     cd octave-4* && \
     ./configure --prefix=/usr/local && \
-    make && \
+    make CFLAGS=-O CXXFLAGS=-O LDFLAGS= && \
     make install && \
     make check && \
     pip2 install -U \
