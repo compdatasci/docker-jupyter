@@ -1,0 +1,7 @@
+services:
+  - docker
+
+script:
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_USERPASS"
+  - docker build --tag compdatasci/octave-jupyter:4.2.1 octave-jupyter && docker push compdatasci/octave-jupyter:4.2.1
+  - docker images
