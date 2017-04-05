@@ -3,8 +3,9 @@ services:
 
 script:
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_USERPASS"
-  - docker build --tag compdatasci/base base && docker push compdatasci/r-jupyter
-  - docker build --tag compdatasci/r-jupyter r-jupyter && docker push compdatasci/r-jupyter
-  - docker build --tag compdatasci/octave-jupyter octave-jupyter && docker push compdatasci/octave-jupyter
-  - docker build --tag compdatasci/scipy-jupyter scipy-jupyter && docker push compdatasci/scipy-jupyter
+  - git clone -b master git@github.com:compdatasci/dockerfiles.git dockerfiles
+  - docker build --tag compdatasci/base base && docker push compdatasci/base && curl -X POST https://registry.hub.docker.com/u/compdatasci/base/trigger/$TOKEN_BASE/ && touch success
+  - cat success && git clone -b docker-octave https://$GIT_USER:$GIT_TOKEN@github.com/compdatasci/dockerfiles.git docker-octave 2> /dev/null && cd docker-octave && git commit --allow-empty -m "Trigger compilation." && git push && cd ..
+  - cat success && git clone -b docker-r https://$GIT_USER:$GIT_TOKEN@github.com/compdatasci/dockerfiles.git docker-r 2> /dev/null && cd docker-r && git commit --allow-empty -m "Trigger compilation." && git push && cd ..
+  - cat success && git clone -b docker-scipy https://$GIT_USER:$GIT_TOKEN@github.com/compdatasci/dockerfiles.git docker-scipy 2> /dev/null && cd docker-scipy && git commit --allow-empty -m "Trigger compilation." && git push && cd ..
   - docker images
