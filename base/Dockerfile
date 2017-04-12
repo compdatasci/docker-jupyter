@@ -88,6 +88,7 @@ RUN echo "America/New_York" > /etc/timezone && \
     ldconfig && \
     touch $DOCKER_HOME/.sudo_as_admin_successful && \
     mkdir $DOCKER_HOME/shared && \
+    mkdir $DOCKER_HOME/.log && touch $DOCKER_HOME/.log/jupyter.log \
     chown -R $DOCKER_USER:$DOCKER_GROUP $DOCKER_HOME
 
 WORKDIR $DOCKER_HOME
