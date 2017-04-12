@@ -19,9 +19,8 @@ RUN apt-get update && \
         octave liboctave-dev \
         gnuplot-x11 \
         libopenblas-base libatlas3-base \
-        ghostscript pstoedit && \
-    pip2 install -U \
-         sympy && \
+        ghostscript pstoedit \
+        python-sympy && \
     pip3 install -U \
         octave_kernel && \
     python3 -m octave_kernel.install && \

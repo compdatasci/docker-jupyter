@@ -2,7 +2,7 @@
 
 This Docker image is for R with Jupyter Notebook. This images inherits [compdatasci/base](https://hub.docker.com/r/compdatasci/base). 
 
-[![Docker Image](https://images.microbadger.com/badges/image/compdatasci/r-jupyter.svg)](https://microbadger.com/images/compdatasci/r-jupyter)
+[![Build Status](https://travis-ci.org/compdatasci/dockerfiles.svg?branch=docker-r)](https://travis-ci.org/compdatasci/dockerfiles)   [![Docker Image](https://images.microbadger.com/badges/image/compdatasci/r-jupyter.svg)](https://microbadger.com/images/compdatasci/r-jupyter)
 
 ## Running Jupyter Notebook with Docker
 
