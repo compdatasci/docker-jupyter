@@ -1,12 +1,12 @@
 # Builds a base Docker image that all other DataComputing images are
 # built off of (FROM). In this image we control the end user
-# experience, namely; creating the user compdatasci, setting up the users
-# environment and the default entry point and cmds.
+# experience, namely; creating the user compdatasci, setting up the
+# users environment and the default entry point and cmds.
 #
 # Although this image is not used directly by end-users, it can be
 # found at:
 #
-#   https://quay.io/repository/compdatasci/base
+#   https://hub.docker.com/r/compdatasci/base
 #
 # Authors:
 # Xiangmin Jiao <xmjiao@gmail.com>
@@ -27,13 +27,13 @@ RUN apt-get update && \
             locales \
             sudo \
             build-essential \
-            python-pip \
             python3-pip \
+            python3-dev \
             pandoc \
             ttf-dejavu && \
-    pip2 install -U pip \
-         setuptools && \
-    pip3 install -U pip \
+    rm -rf /var/lib/apt/lists/*
+
+RUN pip3 install -U pip \
          setuptools && \
     pip3 install -U \
          jupyter \
@@ -78,7 +78,7 @@ ENV DOCKER_GROUP=$DOCKER_USER \
 # Run ldconfig so that /usr/local/lib is in the default search
 # path for the dynamic linker.
 RUN echo "America/New_York" > /etc/timezone && \
-    dpkg-reconfigure -f noninteractive tzdata && \
+    ln -s -f /usr/share/zoneinfo/America/New_York /etc/localtime && \
     useradd -m -s /bin/bash -G sudo,docker_env $DOCKER_USER && \
     echo "$DOCKER_USER:docker" | chpasswd && \
     echo "$DOCKER_USER ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
@@ -86,6 +86,7 @@ RUN echo "America/New_York" > /etc/timezone && \
     ldconfig && \
     touch $DOCKER_HOME/.sudo_as_admin_successful && \
     mkdir $DOCKER_HOME/shared && \
+    mkdir $DOCKER_HOME/.log && touch $DOCKER_HOME/.log/jupyter.log && \
     chown -R $DOCKER_USER:$DOCKER_GROUP $DOCKER_HOME
 
 WORKDIR $DOCKER_HOME

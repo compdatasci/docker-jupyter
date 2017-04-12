@@ -81,19 +81,20 @@ RUN apt-get update && \
         libsuitesparse-dev \
         libvorbis-dev \
         libwmf-dev \
-        uuid-dev && \
-    curl -s ftp://ftp.gnu.org/gnu/octave/octave-4.2.1.tar.gz | tar zx && \
+        uuid-dev \
+	python-sympy && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN curl -s ftp://ftp.gnu.org/gnu/octave/octave-4.2.1.tar.gz | tar zx && \
     cd octave-4* && \
     ./configure --prefix=/usr/local && \
     make CFLAGS=-O CXXFLAGS=-O LDFLAGS= && \
     make install && \
     make check && \
-    pip2 install -U \
-         sympy && \
     pip3 install -U \
         octave_kernel && \
     python3 -m octave_kernel.install && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    rm -rf /tmp/* /var/tmp/*
 
 USER $DOCKER_USER
 
