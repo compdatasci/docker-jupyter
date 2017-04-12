@@ -43,8 +43,3 @@ You can also run the image as a Linux environment for SciPy. You can run the ima
     compdatasci/scipy-jupyter:latest
 
 which would share your current working directory into the container as `~/shared`. *Note that you should only save files under the shared directory because all other files will be lost when the process ends.*
-
-Users with SELinux-enabled Linux distributions (Redhat, Fedora, CentOS, and others) will need to add the `:z` flag to the volume mount, e.g.:
-
-    docker run --rm -ti -w/home/compdatasci/shared -v $(pwd):/home/compdatasci/shared:z \
-    compdatasci/scipy-jupyter:latest

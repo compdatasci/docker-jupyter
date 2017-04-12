@@ -1,12 +1,12 @@
 # Builds a base Docker image that all other DataComputing images are
 # built off of (FROM). In this image we control the end user
-# experience, namely; creating the user compdatasci, setting up the users
-# environment and the default entry point and cmds.
+# experience, namely; creating the user compdatasci, setting up the
+# users environment and the default entry point and cmds.
 #
 # Although this image is not used directly by end-users, it can be
 # found at:
 #
-#   https://quay.io/repository/compdatasci/base
+#   https://hub.docker.com/r/compdatasci/base
 #
 # Authors:
 # Xiangmin Jiao <xmjiao@gmail.com>
@@ -28,7 +28,9 @@ RUN apt-get update && \
             sudo \
             build-essential \
             python-pip \
+            python-dev \
             python3-pip \
+            python3-dev \
             pandoc \
             ttf-dejavu && \
     pip2 install -U pip \
