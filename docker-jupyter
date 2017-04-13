@@ -11,6 +11,7 @@ from __future__ import print_function  # Only Python 2.x
 
 import argparse
 import sys
+import time
 
 # Process command-line arguments
 parser = argparse.ArgumentParser(description=__doc__)
@@ -103,6 +104,7 @@ if __name__ == "__main__":
     import os
     import subprocess
     import webbrowser
+    import platform
 
     pwd = os.getcwd()
 
@@ -134,15 +136,15 @@ if __name__ == "__main__":
                      "-p", "127.0.0.1:" + port + ":" + port,
                      "--env", "HOST_UID=" + uid, image,
                      "jupyter-notebook --no-browser --ip=0.0.0.0 --port " + port +
-                     " > /home/" + user + "/.log/jupyter.log"])
+                     " > /home/" + user + "/.log/jupyter.log 2>&1"])
 
     wait_for_url = True
 
     # Wait for user to press Ctrl-C
     while True:
         try:
-            print("Press Ctrl-C to stop the server.")
             if wait_for_url:
+                time.sleep(1)
                 # Sleep for one second to avoid race conditon
                 p = subprocess.Popen(["docker", "exec", container,
                                       "tail", "-F", "/home/" + user + "/.log/jupyter.log"],
@@ -157,10 +159,10 @@ if __name__ == "__main__":
                         # Open browser if found URL
                         if not notebook:
                             url = "http://localhost:" + \
-                                stderr_line[ind + 15:-1]
+                                stdout_line[ind + 15:-1]
                         else:
                             url = "http://localhost:" + port + "/notebooks/" + notebook + \
-                                stderr_line[stderr_line.find("?token="):-1]
+                                stdout_line[stdout_line.find("?token="):-1]
 
                         print("Copy/paste this URL into your browser when you connect for the first time:")
                         print("    ", url)
@@ -171,6 +173,8 @@ if __name__ == "__main__":
                         p.terminate()
                         wait_for_url = False
                         break
+
+            print("Press Ctrl-C to stop the server.")
             while True:
                 time.sleep(3600)
         except KeyboardInterrupt:
