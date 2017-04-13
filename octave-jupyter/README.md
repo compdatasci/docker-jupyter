@@ -2,7 +2,7 @@
 
 This Docker image is for Octave 4.0 with Jupyter Notebook. This images inherits [compdatasci/base](https://hub.docker.com/r/compdatasci/base). 
 
-[![Build Status](https://travis-ci.org/compdatasci/dockerfiles.svg?branch=octave-4.2.1)](https://travis-ci.org/compdatasci/dockerfiles)    [![Docker Image](https://images.microbadger.com/badges/image/compdatasci/octave-jupyter.svg)](https://microbadger.com/images/compdatasci/octave-jupyter)
+[![Build Status](https://travis-ci.org/compdatasci/dockerfiles.svg?branch=octave-4.2.1)](https://travis-ci.org/compdatasci/dockerfiles)    [![Docker Image](https://images.microbadger.com/badges/image/compdatasci/octave-jupyter:4.2.1.svg)](https://microbadger.com/images/compdatasci/octave-jupyter:4.2.1)
 
 ## Running Jupyter Notebook with Docker
 
