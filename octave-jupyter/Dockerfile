@@ -85,13 +85,14 @@ RUN apt-get update && \
     pip install sympy && \
     rm -rf /var/lib/apt/lists/*
 
+# Install some packages. Note that odepkg does not work with Octave 4.2.1
 RUN curl -s ftp://ftp.gnu.org/gnu/octave/octave-4.2.1.tar.gz | tar zx && \
     cd octave-4* && \
     ./configure --prefix=/usr/local && \
     make CFLAGS=-O CXXFLAGS=-O LDFLAGS= -j 2 && \
     make install && \
     make check && \
-    octave --eval 'pkg install -forge struct parallel symbolic odepkg' && \
+    octave --eval 'pkg install -forge struct parallel symbolic' && \
     pip3 install -U \
         octave_kernel && \
     python3 -m octave_kernel.install && \
