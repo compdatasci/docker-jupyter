@@ -19,17 +19,14 @@ RUN apt-get update && \
         octave liboctave-dev \
         gnuplot-x11 \
         libopenblas-base libatlas3-base \
-        ghostscript pstoedit \
-        python-sympy && \
-    pip3 install -U \
-        octave_kernel && \
+        ghostscript pstoedit && \
+    pip install -U sympy && \
+    octave --eval 'pkg install -forge struct parallel symbolic odepkg' && \
+    pip3 install -U octave_kernel && \
     python3 -m octave_kernel.install && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 USER $DOCKER_USER
-
-# Install symbolic and odepkg
-RUN octave --no-gui --eval "pkg install -forge symbolic odepkg"
 
 USER root
 WORKDIR $DOCKER_HOME
