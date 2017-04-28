@@ -81,25 +81,21 @@ RUN apt-get update && \
         libsuitesparse-dev \
         libvorbis-dev \
         libwmf-dev \
-        uuid-dev \
-	python-sympy && \
+        uuid-dev && \
+    pip install sympy && \
     rm -rf /var/lib/apt/lists/*
 
 RUN curl -s ftp://ftp.gnu.org/gnu/octave/octave-4.2.1.tar.gz | tar zx && \
     cd octave-4* && \
     ./configure --prefix=/usr/local && \
-    make CFLAGS=-O CXXFLAGS=-O LDFLAGS= && \
+    make CFLAGS=-O CXXFLAGS=-O LDFLAGS= -j 2 && \
     make install && \
     make check && \
+    octave --eval 'pkg install -forge struct parallel symbolic odepkg' && \
     pip3 install -U \
         octave_kernel && \
     python3 -m octave_kernel.install && \
     rm -rf /tmp/* /var/tmp/*
-
-USER $DOCKER_USER
-
-# Install symbolic. odepkg fails to compile.
-RUN octave --no-gui --eval "pkg install -forge symbolic"
 
 USER root
 WORKDIR $DOCKER_HOME
