@@ -26,7 +26,4 @@ RUN apt-get update && \
     python3 -m octave_kernel.install && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-USER $DOCKER_USER
-
-USER root
 WORKDIR $DOCKER_HOME
